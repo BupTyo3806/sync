@@ -15,7 +15,7 @@ public class Sync {
 
     public static void main(String[] args) {
         try {
-            ParseXML.Parse("config.xml");
+            ParseXML.Parse("sync_folder//config.xml");
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }

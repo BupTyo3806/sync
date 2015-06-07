@@ -41,7 +41,11 @@ public class Client extends Thread {
             out = new PrintWriter(fromserver.getOutputStream(), true);
             stdin = new Scanner(System.in);
             String fuser, fserver;
-            System.out.println("Print sync or exit");
+            String login = ParseXML.getContent("login");
+            String password = ParseXML.getContent("password");
+            out.println(login);
+            out.println(password);
+            //System.out.println("Print sync or exit");
             while ((fuser = stdin.nextLine()) != null) {
                 if (fuser.equalsIgnoreCase("sync")) {
                     out.println(fuser);

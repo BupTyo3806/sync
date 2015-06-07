@@ -38,6 +38,8 @@ public class Server extends Thread {
             in = new BufferedReader(new InputStreamReader(
                     fromclient.getInputStream()));
             out = new PrintWriter(fromclient.getOutputStream(), true);
+            System.out.println(in.readLine());
+            System.out.println(in.readLine());
             String input;
             while ((input = in.readLine()) != null) {
                 if (input.equalsIgnoreCase("exit")) {
