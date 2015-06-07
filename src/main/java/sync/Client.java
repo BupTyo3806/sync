@@ -45,7 +45,17 @@ public class Client extends Thread {
             String password = ParseXML.getContent("password");
             out.println(login);
             out.println(password);
-            //System.out.println("Print sync or exit");
+
+            String check = in.readLine();
+
+            if (check.equals("true")) {
+                System.out.println("Successful authorization.");
+            } else {
+                System.out.println("Incorrect login or password");
+                System.exit(0);
+            }
+
+            System.out.println("Print sync or exit");
             while ((fuser = stdin.nextLine()) != null) {
                 if (fuser.equalsIgnoreCase("sync")) {
                     out.println(fuser);

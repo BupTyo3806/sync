@@ -251,5 +251,6 @@ public class SyncFolder implements Runnable {
 
         }
         System.out.println("Sync is complete!");
+        System.exit(0);
     }
 }

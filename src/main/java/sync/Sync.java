@@ -6,7 +6,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
-/**
+/**idea gradle запуск проекта
  * Синхронизация двух папок.
  *
  * @author Aleksey Ivashin
@@ -15,7 +15,7 @@ public class Sync {
 
     public static void main(String[] args) {
         try {
-            ParseXML.Parse("sync_folder//config.xml");
+            ParseXML.Parse("sync_folder\\config.xml");
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }

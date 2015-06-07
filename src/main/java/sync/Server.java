@@ -4,6 +4,10 @@ package sync;
  * Created by Alexey on 17.05.2015.
  */
 
+import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,8 +42,19 @@ public class Server extends Thread {
             in = new BufferedReader(new InputStreamReader(
                     fromclient.getInputStream()));
             out = new PrintWriter(fromclient.getOutputStream(), true);
-            System.out.println(in.readLine());
-            System.out.println(in.readLine());
+            String login = in.readLine();
+            String password = in.readLine();
+
+            Mongo mongo = new Mongo();
+            DB db = mongo.getDB("java");
+            DBCollection coll = db.getCollection("users");
+            DBObject user = coll.findOne();
+            if (user.get("login").equals(login) && user.get("password").equals(password)) {
+                out.println(true);
+            } else {
+                out.println(false);
+            }
+
             String input;
             while ((input = in.readLine()) != null) {
                 if (input.equalsIgnoreCase("exit")) {
