@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.rmi.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +60,9 @@ public class Client extends Thread {
             while ((fuser = stdin.nextLine()) != null) {
                 if (fuser.equalsIgnoreCase("sync")) {
                     out.println(fuser);
+                    String objectName = "rmi://" + host + "/TimeService";
+                    RunSync rs = (RunSync) Naming.lookup(objectName);
+                    rs.Start();
                 } else
                 if (fuser.equalsIgnoreCase("exit")) {
                     break;
@@ -68,6 +72,8 @@ public class Client extends Thread {
             }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException e) {
+            e.printStackTrace();
         } finally {
             try {
                 out.close();

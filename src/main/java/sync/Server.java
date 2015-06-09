@@ -5,8 +5,6 @@ package sync;
  */
 
 import com.mongodb.*;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +14,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.rmi.*;
+import java.rmi.registry.*;
 
 /**
  * Класс реализует Server Socket.
@@ -60,9 +60,13 @@ public class Server extends Thread {
                 if (input.equalsIgnoreCase("exit")) {
                     break;
                 } else if (input.equalsIgnoreCase("sync")) {
-                    Thread t = new Thread(new SyncFolder());
+                    /*Thread t = new Thread(new SyncFolder());
                     t.start();
-                    System.out.println("Sync started!");
+                    System.out.println("Sync started!");*/
+                    RunSync sync = new RunSyncImpl();
+                    Registry reg = LocateRegistry.createRegistry(1099);
+                    String serviceName = "TimeService";
+                    reg.rebind(serviceName, sync);
                 }
 
             }
